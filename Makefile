@@ -60,6 +60,7 @@ endef
 
 clean:
 	@$(DOCKER_CMD) image rm -f $(shell $(DOCKER_CMD) image ls --format "{{.Repository}}:{{.Tag}}" --filter=dangling=false --filter=reference="$(DOCKER_REGISTRY)/*:*") 2>/dev/null || true
+	@find . -iname '*.Dockerfile' -delete
 
 prune:
 	@$(DOCKER_CMD) system prune --all --force --volumes
