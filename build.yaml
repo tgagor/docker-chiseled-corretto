@@ -1,5 +1,5 @@
 ---
-prefix: tgagor
+prefix: tgagor/minimal-corretto
 maintainer: Tomasz Gągor <https://gagor.pro>
 
 labels:
