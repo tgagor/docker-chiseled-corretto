@@ -58,7 +58,7 @@ images:
         - 17
         - 21
     args:
-      BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:alpine{{ .alpine }}"
+      BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-base:alpine{{ .alpine }}"
     tags:
       - corretto-jdk:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}
       - corretto-jdk:{{ .java }}-alpine{{ .alpine }}
@@ -80,7 +80,7 @@ images:
         - 17
         - 21
     args:
-      BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:ubuntu{{ .ubuntu }}"
+      BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-base:ubuntu{{ .ubuntu }}"
     tags:
       - corretto-jdk:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
       - corretto-jdk:{{ .java }}-ubuntu{{ .ubuntu }}
