@@ -1,5 +1,5 @@
 ---
-prefix: tgagor/minimal-corretto
+prefix: tgagor
 maintainer: Tomasz Gągor <https://gagor.pro>
 
 labels:
@@ -24,14 +24,14 @@ images:
     args:
       BASE_IMAGE: "alpine:{{ .alpine }}"
     tags:
-      - base:{{ .tag }}-alpine{{ .alpine }}
-      - base:alpine{{ .alpine }}
-      - base:{{ .tag }}-alpine{{ .alpine | splitList "." | first }}
-      - base:alpine{{ .alpine | splitList "." | first }}
-      - base:{{ .tag }}-alpine
-      - base:{{ .tag }}
-      - base:alpine
-      - base
+      - corretto-base:{{ .tag }}-alpine{{ .alpine }}
+      - corretto-base:alpine{{ .alpine }}
+      - corretto-base:{{ .tag }}-alpine{{ .alpine | splitList "." | first }}
+      - corretto-base:alpine{{ .alpine | splitList "." | first }}
+      - corretto-base:{{ .tag }}-alpine
+      - corretto-base:{{ .tag }}
+      - corretto-base:alpine
+      - corretto-base
 
   base-ubuntu:
     dockerfile: base/ubuntu/Dockerfile
@@ -41,12 +41,12 @@ images:
     args:
       BASE_IMAGE: "ubuntu:{{ .ubuntu }}"
     tags:
-      - base:{{ .tag }}-ubuntu{{ .ubuntu }}
-      - base:ubuntu{{ .ubuntu }}
-      - base:{{ .tag }}-ubuntu
-      - base:{{ .tag }}
-      - base:ubuntu
-      - base
+      - corretto-base:{{ .tag }}-ubuntu{{ .ubuntu }}
+      - corretto-base:ubuntu{{ .ubuntu }}
+      - corretto-base:{{ .tag }}-ubuntu
+      - corretto-base:{{ .tag }}
+      - corretto-base:ubuntu
+      - corretto-base
 
   jdk-alpine:
     dockerfile: jdk/alpine/Dockerfile
@@ -60,15 +60,15 @@ images:
     args:
       BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:alpine{{ .alpine }}"
     tags:
-      - jdk:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}
-      - jdk:{{ .java }}-alpine{{ .alpine }}
-      - jdk:{{ .java }}-alpine{{ .alpine | splitList "." | first }}
-      - jdk:{{ .tag }}-{{ .java }}-alpine
-      - jdk:{{ .tag }}-{{ .java }}
-      - jdk:{{ .java }}-alpine
-      - jdk:{{ .java }}
-      - jdk:{{ .tag }}
-      - jdk
+      - corretto-jdk:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}
+      - corretto-jdk:{{ .java }}-alpine{{ .alpine }}
+      - corretto-jdk:{{ .java }}-alpine{{ .alpine | splitList "." | first }}
+      - corretto-jdk:{{ .tag }}-{{ .java }}-alpine
+      - corretto-jdk:{{ .tag }}-{{ .java }}
+      - corretto-jdk:{{ .java }}-alpine
+      - corretto-jdk:{{ .java }}
+      - corretto-jdk:{{ .tag }}
+      - corretto-jdk
 
   jdk-ubuntu:
     dockerfile: jdk/ubuntu/Dockerfile
@@ -82,14 +82,14 @@ images:
     args:
       BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:ubuntu{{ .ubuntu }}"
     tags:
-      - jdk:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
-      - jdk:{{ .java }}-ubuntu{{ .ubuntu }}
-      - jdk:{{ .tag }}-{{ .java }}-ubuntu
-      - jdk:{{ .tag }}-{{ .java }}
-      - jdk:{{ .java }}-ubuntu
-      - jdk:{{ .java }}
-      - jdk:{{ .tag }}
-      - jdk
+      - corretto-jdk:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
+      - corretto-jdk:{{ .java }}-ubuntu{{ .ubuntu }}
+      - corretto-jdk:{{ .tag }}-{{ .java }}-ubuntu
+      - corretto-jdk:{{ .tag }}-{{ .java }}
+      - corretto-jdk:{{ .java }}-ubuntu
+      - corretto-jdk:{{ .java }}
+      - corretto-jdk:{{ .tag }}
+      - corretto-jdk
 
   jre-alpine:
     dockerfile: jre/alpine/Dockerfile.tpl
@@ -101,15 +101,15 @@ images:
         - 17
         - 21
     tags:
-      - jre:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}
-      - jre:{{ .java }}-alpine{{ .alpine }}
-      - jre:{{ .java }}-alpine{{ .alpine | splitList "." | first }}
-      - jre:{{ .tag }}-{{ .java }}-alpine
-      - jre:{{ .tag }}-{{ .java }}
-      - jre:{{ .java }}-alpine
-      - jre:{{ .java }}
-      - jre:{{ .tag }}
-      - jre
+      - corretto-jre:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}
+      - corretto-jre:{{ .java }}-alpine{{ .alpine }}
+      - corretto-jre:{{ .java }}-alpine{{ .alpine | splitList "." | first }}
+      - corretto-jre:{{ .tag }}-{{ .java }}-alpine
+      - corretto-jre:{{ .tag }}-{{ .java }}
+      - corretto-jre:{{ .java }}-alpine
+      - corretto-jre:{{ .java }}
+      - corretto-jre:{{ .tag }}
+      - corretto-jre
 
   jre-ubuntu:
     dockerfile: jre/ubuntu/Dockerfile.tpl
@@ -121,14 +121,14 @@ images:
         - 17
         - 21
     tags:
-      - jre:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
-      - jre:{{ .java }}-ubuntu{{ .ubuntu }}
-      - jre:{{ .tag }}-{{ .java }}-ubuntu
-      - jre:{{ .tag }}-{{ .java }}
-      - jre:{{ .java }}-ubuntu
-      - jre:{{ .java }}
-      - jre:{{ .tag }}
-      - jre
+      - corretto-jre:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
+      - corretto-jre:{{ .java }}-ubuntu{{ .ubuntu }}
+      - corretto-jre:{{ .tag }}-{{ .java }}-ubuntu
+      - corretto-jre:{{ .tag }}-{{ .java }}
+      - corretto-jre:{{ .java }}-ubuntu
+      - corretto-jre:{{ .java }}
+      - corretto-jre:{{ .tag }}
+      - corretto-jre
 
   jre-chiseled:
     dockerfile: jre/chiseled-ubuntu/Dockerfile.tpl
@@ -145,11 +145,11 @@ images:
       UID: 1001
       GID: 1001
     tags:
-      - jre:{{ .tag }}-{{ .java }}-chiseled-ubuntu{{ .ubuntu }}
-      - jre:{{ .java }}-chiseled-ubuntu{{ .ubuntu }}
-      - jre:{{ .tag }}-{{ .java }}-chiseled-ubuntu
-      - jre:{{ .tag }}-{{ .java }}-chiseled
-      - jre:chiseled-{{ .java }}-ubuntu
-      - jre:chiseled-{{ .java }}
-      - jre:{{ .tag }}-chiseled
-      - jre:chiseled
+      - corretto-jre:{{ .tag }}-{{ .java }}-chiseled-ubuntu{{ .ubuntu }}
+      - corretto-jre:{{ .java }}-chiseled-ubuntu{{ .ubuntu }}
+      - corretto-jre:{{ .tag }}-{{ .java }}-chiseled-ubuntu
+      - corretto-jre:{{ .tag }}-{{ .java }}-chiseled
+      - corretto-jre:chiseled-{{ .java }}-ubuntu
+      - corretto-jre:chiseled-{{ .java }}
+      - corretto-jre:{{ .tag }}-chiseled
+      - corretto-jre:chiseled
