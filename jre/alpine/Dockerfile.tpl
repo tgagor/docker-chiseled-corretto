@@ -1,4 +1,4 @@
-FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}jdk:{{ .java }}-alpine{{ .alpine }} AS builder
+FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-jdk:{{ .java }}-alpine{{ .alpine }} AS builder
 
 RUN apk add --no-cache \
         bash \
@@ -10,7 +10,7 @@ RUN jre-build.sh --output /jre && \
     env GZIP=-9 tar zcf legal.tar.gz legal && \
     rm -rf legal
 
-FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:alpine{{ .alpine }}
+FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-base:alpine{{ .alpine }}
 
 RUN apk add --no-cache \
         java-common
