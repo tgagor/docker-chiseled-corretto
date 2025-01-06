@@ -13,7 +13,7 @@ RUN apt-get update && \
     chmod +x /usr/local/sbin/jre-build.sh && \
     jre-build.sh --output /jre && \
     cd /jre && \
-    tar zcvf legal.tar.gz legal && \
+    tar zcf legal.tar.gz legal && \
     rm -rf legal
 
 FROM tgagor/chisel:{{ .ubuntu }} AS base-os
@@ -54,5 +54,4 @@ ENV JAVA_HOME=/usr/lib/jvm/java-{{ .java }}-amazon-corretto-jre
 COPY --from=base-os /rootfs /
 # Workaround for https://github.com/moby/moby/issues/38710
 COPY --from=base-os --chown=$UID:$GID /rootfs/home/$USER /home/$USER
-RUN java -version
 ENTRYPOINT ["/usr/bin/java"]

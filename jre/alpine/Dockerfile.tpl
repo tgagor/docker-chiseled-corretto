@@ -5,7 +5,10 @@ RUN apk add --no-cache \
         binutils
 
 COPY jre-build.sh /usr/local/sbin/
-RUN jre-build.sh --output /jre
+RUN jre-build.sh --output /jre && \
+    cd /jre && \
+    env GZIP=-9 tar zcf legal.tar.gz legal && \
+    rm -rf legal
 
 FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:alpine{{ .alpine }}
 

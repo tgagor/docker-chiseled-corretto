@@ -15,7 +15,6 @@ build:
 	$(call stage_status,$@)
 	td --config $(BUILD_CONFIG) \
 		--build \
-		--verbose \
 		--tag $(GIT_TAG)
 
 $(IMAGES):
@@ -23,6 +22,7 @@ $(IMAGES):
 	td --config $(BUILD_CONFIG) \
 		--image $@ \
 		--build \
+		--verbose \
 		--tag $(GIT_TAG)
 
 push:
