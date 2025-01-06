@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=tgagor/base:ubuntu
+ARG BASE_IMAGE=ubuntu
 FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -28,6 +28,7 @@ RUN apt-get update && \
     apt-get install -y wget gpg && \
     wget -O - https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list && \
+    apt-get update && \
     apt-get install -y \
         ca-certificates-java \
         java-${JAVA_VERSION}-amazon-corretto-jdk && \

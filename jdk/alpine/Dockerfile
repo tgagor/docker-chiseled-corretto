@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=tgagor/base:alpine
+ARG BASE_IMAGE=alpine
 FROM ${BASE_IMAGE}
 
 # set default file encoding to UTF-8
