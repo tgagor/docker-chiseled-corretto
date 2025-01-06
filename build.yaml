@@ -7,7 +7,7 @@ labels:
   org.opencontainers.image.licenses: Apache-2.0-only
   org.opencontainers.image.url: https://hub.docker.com/u/tgagor
   org.opencontainers.image.documentation: https://my.url/docshttps://github.com/tgagor/docker-chiseled-corretto/blob/main/README.md
-  org.opencontainers.image.title: Amazon's Corretto JDK and JRE images in chiselled variant
+  org.opencontainers.image.title: Amazon's Corretto JDK and JRE images in chiseled variant
   org.opencontainers.image.description: |
     This is a Proof of Concept, to use Cannonical's Chisel tool
     to build super light Amazon Corretto JRE images.
@@ -130,8 +130,8 @@ images:
       - jre:{{ .tag }}
       - jre
 
-  jre-chiselled:
-    dockerfile: jre/chiselled-ubuntu/Dockerfile.tpl
+  jre-chiseled:
+    dockerfile: jre/chiseled-ubuntu/Dockerfile.tpl
     variables:
       ubuntu:
         - "24.04"
@@ -145,11 +145,11 @@ images:
       UID: 1001
       GID: 1001
     tags:
-      - jre:{{ .tag }}-{{ .java }}-chiselled-ubuntu{{ .ubuntu }}
-      - jre:{{ .java }}-chiselled-ubuntu{{ .ubuntu }}
-      - jre:{{ .tag }}-{{ .java }}-chiselled-ubuntu
-      - jre:{{ .tag }}-{{ .java }}-chiselled
-      - jre:chiselled-{{ .java }}-ubuntu
-      - jre:chiselled-{{ .java }}
-      - jre:{{ .tag }}-chiselled
-      - jre:chiselled
+      - jre:{{ .tag }}-{{ .java }}-chiseled-ubuntu{{ .ubuntu }}
+      - jre:{{ .java }}-chiseled-ubuntu{{ .ubuntu }}
+      - jre:{{ .tag }}-{{ .java }}-chiseled-ubuntu
+      - jre:{{ .tag }}-{{ .java }}-chiseled
+      - jre:chiseled-{{ .java }}-ubuntu
+      - jre:chiseled-{{ .java }}
+      - jre:{{ .tag }}-chiseled
+      - jre:chiseled
