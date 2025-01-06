@@ -1,5 +1,5 @@
-ARG ALPINE_RELEASE=3.21
-FROM alpine:${ALPINE_RELEASE}
+ARG BASE_IMAGE=alpine:3.21
+FROM ${BASE_IMAGE}
 
 # set default file encoding to UTF-8
 ENV LANG=en_US.UTF-8
@@ -29,3 +29,4 @@ ENTRYPOINT ["/sbin/tini", "--"]
 RUN wget -O /etc/apk/keys/amazoncorretto.rsa.pub https://apk.corretto.aws/amazoncorretto.rsa.pub && \
     echo "https://apk.corretto.aws/" >> /etc/apk/repositories && \
     apk update
+

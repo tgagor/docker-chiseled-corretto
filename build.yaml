@@ -22,7 +22,7 @@ images:
       alpine:
         - "3.21"
     args:
-      ALPINE_RELEASE: "{{ .alpine }}"
+      BASE_IMAGE: "alpine:{{ .alpine }}"
     tags:
       - base:{{ .tag }}-alpine{{ .alpine }}
       - base:alpine{{ .alpine }}
@@ -31,6 +31,21 @@ images:
       - base:{{ .tag }}-alpine
       - base:{{ .tag }}
       - base:alpine
+      - base
+
+  base-ubuntu:
+    dockerfile: base/ubuntu/Dockerfile
+    variables:
+      ubuntu:
+        - "24.04"
+    args:
+      BASE_IMAGE: "ubuntu:{{ .ubuntu }}"
+    tags:
+      - base:{{ .tag }}-ubuntu{{ .ubuntu }}
+      - base:ubuntu{{ .ubuntu }}
+      - base:{{ .tag }}-ubuntu
+      - base:{{ .tag }}
+      - base:ubuntu
       - base
 
   jdk-alpine:
@@ -64,7 +79,7 @@ images:
         - 17
         - 21
     args:
-      UBUNTU_RELEASE: "{{ .ubuntu }}"
+      BASE_IMAGE: "{{ if .registry }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:ubuntu{{ .ubuntu }}"
     tags:
       - jdk:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
       - jdk:{{ .java }}-ubuntu{{ .ubuntu }}
@@ -90,6 +105,24 @@ images:
       - jre:{{ .tag }}-{{ .java }}-alpine
       - jre:{{ .tag }}-{{ .java }}
       - jre:{{ .java }}-alpine
+      - jre:{{ .java }}
+      - jre:{{ .tag }}
+      - jre
+
+  jre-ubuntu:
+    dockerfile: jre/ubuntu/Dockerfile.tpl
+    variables:
+      ubuntu:
+        - "24.04"
+      java:
+        - 17
+        - 21
+    tags:
+      - jre:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}
+      - jre:{{ .java }}-ubuntu{{ .ubuntu }}
+      - jre:{{ .tag }}-{{ .java }}-ubuntu
+      - jre:{{ .tag }}-{{ .java }}
+      - jre:{{ .java }}-ubuntu
       - jre:{{ .java }}
       - jre:{{ .tag }}
       - jre
