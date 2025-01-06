@@ -54,4 +54,5 @@ ENV JAVA_HOME=/usr/lib/jvm/java-{{ .java }}-amazon-corretto-jre
 COPY --from=base-os /rootfs /
 # Workaround for https://github.com/moby/moby/issues/38710
 COPY --from=base-os --chown=$UID:$GID /rootfs/home/$USER /home/$USER
+RUN java -version
 ENTRYPOINT ["/usr/bin/java"]

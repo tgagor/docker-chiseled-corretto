@@ -2,18 +2,18 @@
 prefix: tgagor
 maintainer: Tomasz Gągor <https://gagor.pro>
 
-# labels:
-#   org.opencontainers.image.vendor: My Corp
-#   # https://spdx.github.io/spdx-spec/v2.3/SPDX-license-expressions/
-#   org.opencontainers.image.licenses: GPL-2.0-only
-#   org.opencontainers.image.url: https://my.url
-#   org.opencontainers.image.documentation: https://my.url/docs
-#   org.opencontainers.image.title: My Corp's Docker base images
-#   org.opencontainers.image.description: |
-#     This is a longer description of what this image is capable of.
+labels:
+  org.opencontainers.image.vendor: https://gagor.pro
+  org.opencontainers.image.licenses: Apache-2.0-only
+  org.opencontainers.image.url: https://hub.docker.com/u/tgagor
+  org.opencontainers.image.documentation: https://my.url/docshttps://github.com/tgagor/docker-chiseled-corretto/blob/main/README.md
+  org.opencontainers.image.title: Amazon's Corretto JDK and JRE images in chiselled variant
+  org.opencontainers.image.description: |
+    This is a Proof of Concept, to use Cannonical's Chisel tool
+    to build super light Amazon Corretto JRE images.
 
-#     Let try templates here.
-#     Image test-case-2d on Alpine Linux {{ .alpine }}
+    https://github.com/canonical/chisel
+    https://aws.amazon.com/corretto/
 
 images:
   base-alpine:
@@ -54,7 +54,7 @@ images:
       alpine:
         - "3.21"
       java:
-        # - 11
+        - 11
         - 17
         - 21
     args:
@@ -66,6 +66,7 @@ images:
       - jdk:{{ .tag }}-{{ .java }}-alpine
       - jdk:{{ .tag }}-{{ .java }}
       - jdk:{{ .java }}-alpine
+      - jdk:{{ .java }}
       - jdk:{{ .tag }}
       - jdk
 
@@ -75,7 +76,7 @@ images:
       ubuntu:
         - "24.04"
       java:
-        # - 11
+        - 11
         - 17
         - 21
     args:
@@ -96,6 +97,7 @@ images:
       alpine:
         - "3.21"
       java:
+        - 11
         - 17
         - 21
     tags:
@@ -115,6 +117,7 @@ images:
       ubuntu:
         - "24.04"
       java:
+        - 11
         - 17
         - 21
     tags:
@@ -133,6 +136,7 @@ images:
       ubuntu:
         - "24.04"
       java:
+        - 11
         - 17
         - 21
     args:
