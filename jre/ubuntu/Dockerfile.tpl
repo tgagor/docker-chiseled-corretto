@@ -5,7 +5,9 @@ RUN apt-get update && \
     apt-get install -y binutils && \
     chmod +x /usr/local/sbin/jre-build.sh && \
     jre-build.sh --output /jre && \
-    ls -la /jre
+    cd /jre && \
+    env GZIP=-9 tar zcvf legal.tar.gz legal && \
+    rm -rf legal
 
 FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}base:ubuntu{{ .ubuntu }}
 

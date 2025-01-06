@@ -126,3 +126,24 @@ images:
       - jre:{{ .java }}
       - jre:{{ .tag }}
       - jre
+
+  jre-chiselled:
+    dockerfile: jre/chiselled-ubuntu/Dockerfile.tpl
+    variables:
+      ubuntu:
+        - "24.04"
+      java:
+        - 17
+        - 21
+    args:
+      USER: app
+      GROUP: app
+      UID: 1001
+      GID: 1001
+    tags:
+      - jre:{{ .tag }}-chiselled-{{ .java }}-ubuntu{{ .ubuntu }}
+      - jre:chiselled-{{ .java }}-ubuntu{{ .ubuntu }}
+      - jre:{{ .tag }}-chiselled-{{ .java }}-ubuntu
+      - jre:{{ .tag }}-chiselled-{{ .java }}
+      - jre:chiselled-{{ .java }}-ubuntu
+      - jre:chiselled-{{ .java }}
