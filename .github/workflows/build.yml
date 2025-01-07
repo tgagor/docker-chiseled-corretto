@@ -77,6 +77,8 @@ jobs:
           echo ${{ secrets.HUB_ACCESS }} | docker login -u $GITHUB_ACTOR --password-stdin
           td  --config build.yaml \
               --build \
+              --tag ${DOCKER_TAG}
+          td  --config build.yaml \
               --push \
               --tag ${DOCKER_TAG}
 
