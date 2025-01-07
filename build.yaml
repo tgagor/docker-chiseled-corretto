@@ -101,14 +101,9 @@ images:
       UID: 1001
       GID: 1001
     tags:
-      - corretto:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}-jre
       - corretto:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}-chiseled
-      - corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jre
       - corretto:{{ .java }}-ubuntu{{ .ubuntu }}-chiseled
-      - corretto:{{ .java }}-ubuntu-jre
       - corretto:{{ .java }}-ubuntu-chiseled
-      - corretto:{{ .java }}-jre
       - corretto:{{ .java }}-chiseled
-      - corretto:{{ .tag }}-jre
       - corretto:{{ .tag }}-chiseled
       - corretto:chiseled
