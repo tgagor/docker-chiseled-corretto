@@ -15,6 +15,7 @@ build:
 	$(call stage_status,$@)
 	td --config $(BUILD_CONFIG) \
 		--build \
+		--delete \
 		--tag $(GIT_TAG)
 
 $(IMAGES):
@@ -22,6 +23,7 @@ $(IMAGES):
 	td --config $(BUILD_CONFIG) \
 		--image $@ \
 		--build \
+		--delete \
 		--verbose \
 		--tag $(GIT_TAG)
 
