@@ -2,7 +2,7 @@ ARG USER=app
 ARG UID=1001
 ARG GROUP=app
 ARG GID=1001
-FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-jdk:{{ .java }}-ubuntu{{ .ubuntu }} AS jre-builder
+FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk AS jre-builder
 
 COPY jre-build.sh /usr/local/sbin/
 RUN apt-get update && \

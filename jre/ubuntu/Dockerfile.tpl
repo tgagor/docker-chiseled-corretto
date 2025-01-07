@@ -1,4 +1,4 @@
-FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-jdk:{{ .java }}-ubuntu{{ .ubuntu }} AS builder
+FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk AS builder
 
 COPY jre-build.sh /usr/local/sbin/
 RUN apt-get update && \
@@ -9,7 +9,7 @@ RUN apt-get update && \
     env GZIP=-9 tar zcf legal.tar.gz legal && \
     rm -rf legal
 
-FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto-base:ubuntu{{ .ubuntu }}
+FROM ubuntu:{{ .ubuntu }}
 
 RUN apt-get update && \
     apt-get install -y \
