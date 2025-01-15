@@ -17,7 +17,7 @@ labels:
 
 images:
   jdk-alpine:
-    dockerfile: jdk/alpine/Dockerfile
+    dockerfile: jdk/alpine.Dockerfile
     variables:
       alpine:
         - "3.21"
@@ -36,7 +36,7 @@ images:
       - corretto:jdk
 
   jdk-ubuntu:
-    dockerfile: jdk/ubuntu/Dockerfile
+    dockerfile: jdk/ubuntu.Dockerfile
     variables:
       ubuntu:
         - "24.04"
@@ -54,7 +54,7 @@ images:
       - corretto:jdk
 
   jre-alpine:
-    dockerfile: jre/alpine/Dockerfile.tpl
+    dockerfile: jre/alpine.Dockerfile.tpl
     variables:
       alpine:
         - "3.21"
@@ -71,7 +71,7 @@ images:
       - corretto:jre
 
   jre-ubuntu:
-    dockerfile: jre/ubuntu/Dockerfile.tpl
+    dockerfile: jre/ubuntu.Dockerfile.tpl
     variables:
       ubuntu:
         - "24.04"
@@ -87,7 +87,7 @@ images:
       - corretto:jre
 
   jre-chiseled:
-    dockerfile: jre/chiseled-ubuntu/Dockerfile.tpl
+    dockerfile: jre/chiseled-ubuntu.Dockerfile.tpl
     variables:
       ubuntu:
         - "24.04"
