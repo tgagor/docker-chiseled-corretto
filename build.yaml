@@ -25,6 +25,7 @@ images:
         - 11
         - 17
         - 21
+        - 24
     args:
       BASE_IMAGE: alpine:{{ .alpine }}
     tags:
@@ -44,6 +45,7 @@ images:
         - 11
         - 17
         - 21
+        - 24
     args:
       BASE_IMAGE: ubuntu:{{ .ubuntu }}
     tags:
@@ -62,6 +64,7 @@ images:
         - 11
         - 17
         - 21
+        - 24
     tags:
       - corretto:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}-jre
       - corretto:{{ .java }}-alpine{{ .alpine }}-jre
@@ -79,6 +82,7 @@ images:
         - 11
         - 17
         - 21
+        - 24
     tags:
       - corretto:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}-jre
       - corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jre
@@ -95,6 +99,7 @@ images:
         - 11
         - 17
         - 21
+        - 24
     args:
       USER: app
       GROUP: app
