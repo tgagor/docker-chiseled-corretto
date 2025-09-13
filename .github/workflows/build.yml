@@ -12,9 +12,9 @@ on:
     branches:
       - main
   #     - dependabot/*
-  # schedule:
-  #   # weekly: at 04:13 on Monday
-  #   - cron: '13 4 * * 1'
+  schedule:
+    # weekly: at 04:13 on Monday
+    - cron: '13 4 * * 1'
 
 jobs:
   build:
