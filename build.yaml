@@ -15,6 +15,9 @@ labels:
     https://github.com/canonical/chisel
     https://aws.amazon.com/corretto/
 
+options:
+  - "--sbom=true"
+
 images:
   jdk-alpine:
     dockerfile: jdk/alpine.Dockerfile
