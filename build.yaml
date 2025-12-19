@@ -17,6 +17,8 @@ labels:
 
 options:
   - "--sbom=true"
+  - --output
+  - type=image,compression=zstd,compression-level=22
 
 images:
   jdk-alpine:
