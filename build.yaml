@@ -6,7 +6,7 @@ labels:
   org.opencontainers.image.vendor: https://gagor.pro
   org.opencontainers.image.licenses: Apache-2.0-only
   org.opencontainers.image.url: https://hub.docker.com/u/tgagor
-  org.opencontainers.image.documentation: https://my.url/docshttps://github.com/tgagor/docker-chiseled-corretto/blob/main/README.md
+  org.opencontainers.image.documentation: https://github.com/tgagor/docker-chiseled-corretto/blob/main/README.md
   org.opencontainers.image.title: Amazon's Corretto JDK and JRE images in chiseled variant
   org.opencontainers.image.description: |
     This is a Proof of Concept, to use Cannonical's Chisel tool
@@ -32,6 +32,7 @@ images:
         - 25
     args:
       BASE_IMAGE: alpine:{{ .alpine }}
+      JAVA_VERSION: "{{ .java }}"
     tags:
       - corretto:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}-jdk
       - corretto:{{ .java }}-alpine{{ .alpine }}-jdk
@@ -53,6 +54,7 @@ images:
         - 25
     args:
       BASE_IMAGE: ubuntu:{{ .ubuntu }}
+      JAVA_VERSION: "{{ .java }}"
     tags:
       - corretto:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}-jdk
       - corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk
@@ -61,7 +63,7 @@ images:
       - corretto:jdk
 
   jre-alpine:
-    dockerfile: jre/alpine.Dockerfile.tpl
+    dockerfile: jre/alpine.Dockerfile
     variables:
       alpine:
         - "3.21"
@@ -71,6 +73,9 @@ images:
         - 21
         - 24
         - 25
+    args:
+      BASE_IMAGE: "{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-alpine{{ .alpine }}-jdk"
+      JAVA_VERSION: "{{ .java }}"
     tags:
       - corretto:{{ .tag }}-{{ .java }}-alpine{{ .alpine }}-jre
       - corretto:{{ .java }}-alpine{{ .alpine }}-jre
@@ -80,7 +85,7 @@ images:
       - corretto:jre
 
   jre-ubuntu:
-    dockerfile: jre/ubuntu.Dockerfile.tpl
+    dockerfile: jre/ubuntu.Dockerfile
     variables:
       ubuntu:
         - "24.04"
@@ -90,6 +95,9 @@ images:
         - 21
         - 24
         - 25
+    args:
+      BASE_IMAGE: "{{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk"
+      JAVA_VERSION: "{{ .java }}"
     tags:
       - corretto:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}-jre
       - corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jre
@@ -98,7 +106,7 @@ images:
       - corretto:jre
 
   jre-chiseled:
-    dockerfile: jre/chiseled-ubuntu.Dockerfile.tpl
+    dockerfile: jre/chiseled-ubuntu.Dockerfile
     variables:
       ubuntu:
         - "24.04"
@@ -113,6 +121,9 @@ images:
       GROUP: app
       UID: 1001
       GID: 1001
+      BASE_IMAGE: "{{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk"
+      UBUNTU_VERSION: "{{ .ubuntu }}"
+      JAVA_VERSION: "{{ .java }}"
     tags:
       - corretto:{{ .tag }}-{{ .java }}-ubuntu{{ .ubuntu }}-chiseled
       - corretto:{{ .java }}-ubuntu{{ .ubuntu }}-chiseled

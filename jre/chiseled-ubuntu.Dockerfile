@@ -2,7 +2,9 @@ ARG USER=app
 ARG UID=1001
 ARG GROUP=app
 ARG GID=1001
-FROM {{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk AS jre-builder
+ARG BASE_IMAGE=ubuntu
+ARG UBUNTU_VERSION=latest
+FROM $BASE_IMAGE AS jre-builder
 
 COPY jre-build.sh /usr/local/sbin/
 RUN apt-get update && \
@@ -16,7 +18,7 @@ RUN apt-get update && \
     tar zcf legal.tar.gz legal && \
     rm -rf legal
 
-FROM tgagor/chisel:{{ .ubuntu }} AS base-os
+FROM tgagor/chisel:$UBUNTU_VERSION AS base-os
 ARG USER
 ARG UID
 ARG GROUP
@@ -24,7 +26,7 @@ ARG GID
 
 RUN mkdir -p /rootfs  && \
     chisel cut \
-        # --release ubuntu-{{ .ubuntu }} \
+        # --release ubuntu-$UBUNTU_VERSION \
         --root /rootfs \
         libc6_libs \
         libgcc-s1_libs \
@@ -38,19 +40,21 @@ RUN install -d -m 0755 -o $UID -g $GID /rootfs/home/$USER && \
     mkdir -p /rootfs/etc && \
     echo -e "root:x:0:\n$GROUP:x:$GID:" >/rootfs/etc/group && \
     echo -e "root:x:0:0:root:/root:/noshell\n$USER:x:$UID:$GID::/home/$USER:/noshell" >/rootfs/etc/passwd
-RUN mkdir -p /rootfs/usr/lib/jvm/java-{{ .java }}-amazon-corretto-jre
-COPY --from=jre-builder /jre /rootfs/usr/lib/jvm/java-{{ .java }}-amazon-corretto-jre
+ARG JAVA_VERSION=17
+RUN mkdir -p /rootfs/usr/lib/jvm/java-${JAVA_VERSION}-amazon-corretto-jre
+COPY --from=jre-builder /jre /rootfs/usr/lib/jvm/java-${JAVA_VERSION}-amazon-corretto-jre
 
 WORKDIR /rootfs
-RUN ln -s --relative usr/lib/jvm/java-{{ .java }}-amazon-corretto-jre/bin/java usr/bin/
+RUN ln -s --relative usr/lib/jvm/java-${JAVA_VERSION}-amazon-corretto-jre/bin/java usr/bin/
 
 FROM scratch
 ARG USER
 ARG UID
 ARG GROUP
 ARG GID
+ARG JAVA_VERSION=17
 USER $UID:$GID
-ENV JAVA_HOME=/usr/lib/jvm/java-{{ .java }}-amazon-corretto-jre
+ENV JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-amazon-corretto-jre
 COPY --from=base-os /rootfs /
 # Workaround for https://github.com/moby/moby/issues/38710
 COPY --from=base-os --chown=$UID:$GID /rootfs/home/$USER /home/$USER

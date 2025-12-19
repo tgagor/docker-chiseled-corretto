@@ -66,6 +66,7 @@ clean:
 
 prune:
 	@$(DOCKER_CMD) system prune --all --force --volumes
+	@$(DOCKER_CMD) buildx prune --all --force
 
 summary:
 	$(call summary)
