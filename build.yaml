@@ -25,10 +25,8 @@ images:
       alpine:
         - "3.21"
       java:
-        - 11
         - 17
         - 21
-        - 24
         - 25
     args:
       BASE_IMAGE: alpine:{{ .alpine }}
@@ -47,10 +45,8 @@ images:
       ubuntu:
         - "24.04"
       java:
-        - 11
         - 17
         - 21
-        - 24
         - 25
     args:
       BASE_IMAGE: ubuntu:{{ .ubuntu }}
@@ -68,10 +64,8 @@ images:
       alpine:
         - "3.21"
       java:
-        - 11
         - 17
         - 21
-        - 24
         - 25
     args:
       BASE_IMAGE: "{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-alpine{{ .alpine }}-jdk"
@@ -90,10 +84,8 @@ images:
       ubuntu:
         - "24.04"
       java:
-        - 11
         - 17
         - 21
-        - 24
         - 25
     args:
       BASE_IMAGE: "{{ if .registry  }}{{ .registry }}/{{ end }}{{ if .prefix }}{{ .prefix }}/{{ end }}corretto:{{ .java }}-ubuntu{{ .ubuntu }}-jdk"
@@ -111,10 +103,8 @@ images:
       ubuntu:
         - "24.04"
       java:
-        - 11
         - 17
         - 21
-        - 24
         - 25
     args:
       USER: app
