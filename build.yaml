@@ -23,7 +23,7 @@ images:
     dockerfile: jdk/alpine.Dockerfile
     variables:
       alpine:
-        - "3.21"
+        - "3.23"
       java:
         - 17
         - 21
@@ -62,7 +62,7 @@ images:
     dockerfile: jre/alpine.Dockerfile
     variables:
       alpine:
-        - "3.21"
+        - "3.23"
       java:
         - 17
         - 21
