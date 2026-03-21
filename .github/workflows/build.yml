@@ -62,7 +62,7 @@ jobs:
         run: echo "DOCKER_TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Setup Template Dockerfiles
-        uses: tgagor/template-dockerfiles@v0.16.5
+        uses: tgagor/template-dockerfiles@v0.17.0
 
       - name: Just build on branches
         if: github.ref != 'refs/heads/main'
