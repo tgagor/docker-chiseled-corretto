@@ -3,17 +3,17 @@ name: build
 on:
   push:
     paths-ignore:
-      - 'README.md'
+      - "README.md"
     branches:
       - main
-      - 'feature/*'
-      - 'bugfix/*'
+      - "feature/*"
+      - "bugfix/*"
   pull_request:
     branches:
       - main
   schedule:
     # monthly: at 04:13
-    - cron: '13 4 1 * *'
+    - cron: "13 4 1 * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -62,7 +62,7 @@ jobs:
         run: echo "DOCKER_TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Setup Template Dockerfiles
-        uses: tgagor/template-dockerfiles@v0.17.0
+        uses: tgagor/template-dockerfiles@v0.17.6
 
       - name: Just build on branches
         if: github.ref != 'refs/heads/main'
