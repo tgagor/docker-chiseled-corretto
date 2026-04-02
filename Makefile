@@ -7,6 +7,9 @@ DOCKER_CMD ?= docker
 MAINTAINER ?= $(shell cat build.yaml| yq -r '.maintainer')
 IMAGES := $(shell cat build.yaml| yq -r '.images|keys[]')
 
+# use numer of available CPUs to run multiple builds at the same time
+PARALLEL := $(shell $(DOCKER_CMD) info --format "{{ .NCPU }}")
+
 .PHONY: all all-images push summary clean
 
 all: build summary
@@ -14,6 +17,7 @@ all: build summary
 build:
 	$(call stage_status,$@)
 	td --config $(BUILD_CONFIG) \
+		--parallel $(PARALLEL) \
 		--build \
 		--delete \
 		--tag $(GIT_TAG)
@@ -22,6 +26,7 @@ $(IMAGES):
 	$(call stage_status,$@)
 	td --config $(BUILD_CONFIG) \
 		--image $@ \
+		--parallel $(PARALLEL) \
 		--build \
 		--delete \
 		--verbose \
@@ -29,12 +34,14 @@ $(IMAGES):
 
 push:
 	td --config $(BUILD_CONFIG) \
+		--parallel $(PARALLEL) \
 		--push \
 		--tag $(GIT_TAG)
 
 build-and-push:
 	$(call stage_status,$@)
 	td --config $(BUILD_CONFIG) \
+		--parallel $(PARALLEL) \
 		--build \
 		--push \
 		--tag $(GIT_TAG)
