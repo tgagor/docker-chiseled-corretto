@@ -101,7 +101,7 @@ images:
       - corretto:jre
 
   jre-chiseled:
-    dockerfile: jre/chiseled-ubuntu.Dockerfile
+    dockerfile: jre/chiseled-ubuntu.Dockerfile.tpl
     variables:
       ubuntu:
         - "24.04"

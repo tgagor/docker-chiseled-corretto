@@ -26,17 +26,23 @@ ARG GID
 
 RUN mkdir -p /rootfs  && \
     chisel cut \
+{{- if eq .ubuntu "26.04" }}
+        # to allow to work with not yet released 26.04
+        --ignore unstable \
+{{- end }}
         # --release ubuntu-$UBUNTU_VERSION \
         --root /rootfs \
-        libc6_libs \
-        libgcc-s1_libs \
-        libstdc++6_libs \
-        zlib1g_libs \
-        libgraphite2-3_libs \
-        libglib2.0-0t64_core \
-        base-files_bin \
-        base-files_chisel
-RUN install -d -m 0755 -o $UID -g $GID /rootfs/home/$USER && \
+            libc6_libs \
+            libgcc-s1_libs \
+            libstdc++6_libs \
+            zlib1g_libs \
+            libgraphite2-3_libs \
+            libglib2.0-0t64_core \
+            base-files_bin \
+            base-files_chisel
+RUN mkdir -p /rootfs/home/$USER && \
+    chmod 0755 /rootfs/home/$USER && \
+    chown $UID:$GID /rootfs/home/$USER && \
     mkdir -p /rootfs/etc && \
     echo -e "root:x:0:\n$GROUP:x:$GID:" >/rootfs/etc/group && \
     echo -e "root:x:0:0:root:/root:/noshell\n$USER:x:$UID:$GID::/home/$USER:/noshell" >/rootfs/etc/passwd
