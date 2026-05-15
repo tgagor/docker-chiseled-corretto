@@ -3,17 +3,17 @@ name: build
 on:
   push:
     paths-ignore:
-      - 'README.md'
+      - README.md
     branches:
       - main
-      - 'feature/*'
-      - 'bugfix/*'
+      - feature/*
+      - bugfix/*
   pull_request:
     branches:
       - main
   schedule:
     # monthly: at 04:13
-    - cron: '13 4 1 * *'
+    - cron: "13 4 1 * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
