@@ -36,7 +36,9 @@ RUN mkdir -p /rootfs  && \
         libglib2.0-0t64_core \
         base-files_bin \
         base-files_chisel
-RUN install -d -m 0755 -o $UID -g $GID /rootfs/home/$USER && \
+RUN mkdir -p /rootfs/home/$USER && \
+    chown -R $UID:$GID /rootfs/home/$USER && \
+    chmod 0755 /rootfs/home/$USER && \
     mkdir -p /rootfs/etc && \
     echo -e "root:x:0:\n$GROUP:x:$GID:" >/rootfs/etc/group && \
     echo -e "root:x:0:0:root:/root:/noshell\n$USER:x:$UID:$GID::/home/$USER:/noshell" >/rootfs/etc/passwd

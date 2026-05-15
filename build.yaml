@@ -46,6 +46,7 @@ images:
     variables:
       ubuntu:
         - "24.04"
+        - "26.04"
       java:
         - 17
         - 21
@@ -85,6 +86,7 @@ images:
     variables:
       ubuntu:
         - "24.04"
+        - "26.04"
       java:
         - 17
         - 21
@@ -104,6 +106,7 @@ images:
     variables:
       ubuntu:
         - "24.04"
+        - "26.04"
       java:
         - 17
         - 21
